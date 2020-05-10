@@ -22,7 +22,7 @@
 
 <script>
 var Airtable = require('airtable');
-var base = new Airtable({apiKey: 'keytaFveWwlPvHFjw'}).base('appylwBgblBsAmQEc');
+var base = new Airtable({apiKey: process.env.VUE_APP_AIRTABLE_API_KEY}).base(process.env.VUE_APP_AIRTABLE_MGR_DEV_BASE);
 export default {
     name: "Books",
     data() {
@@ -30,7 +30,7 @@ export default {
         books: null
       };
     },
-    created: function(){
+    mounted: function(){
       var vm = this;
       let allBooks=[]
       base('books').select({
