@@ -3,16 +3,37 @@
         <div class="row no-gutters" >
             <div class="col-md-2 no-gutters"> 
                 <div class="leftPanel">
+                    <router-link to="/"><p  class="left-panel-item">👩🏾‍💻 Jobs</p></router-link>
+                    <router-link to="/links"><p  class="left-panel-item">🔗 Links</p></router-link>
+                    <router-link to="/books"><p  class="left-panel-item">📚 Books</p></router-link>
+                    <router-link to="/podcasts"><p  class="left-panel-item">🎧 Podcasts</p></router-link>
+                    <router-link to="/"><p  class="left-panel-item">🗣 Conferences</p></router-link>
+                    <router-link to="/"><p  class="left-panel-item">🤓 Courses</p></router-link>
                 </div>
             </div>
             <div class="col-md-8 no-gutters" >
                 <div class="middlePanel">
-                    <router-link class="nav-link" to="/podcasts">Podcasts</router-link>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique magna sit amet purus gravida quis blandit. Sit amet risus nullam eget felis. Velit aliquet sagittis id consectetur purus ut faucibus pulvinar. Justo eget magna fermentum iaculis. Tortor vitae purus faucibus ornare suspendisse. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Nunc mattis enim ut tellus elementum. Laoreet sit amet cursus sit amet dictum sit amet. Imperdiet massa tincidunt nunc pulvinar sapien et. Risus sed vulputate odio ut enim. Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus. Venenatis urna cursus eget nunc scelerisque viverra mauris in aliquam. Fringilla est ullamcorper eget nulla. Volutpat lacus laoreet non curabitur gravida arcu ac tortor. Massa tempor nec feugiat nisl pretium fusce id. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique magna sit amet purus gravida quis blandit. Sit amet risus nullam eget felis. Velit aliquet sagittis id consectetur purus ut faucibus pulvinar. Justo eget magna fermentum iaculis. Tortor vitae purus faucibus ornare suspendisse. Posuere lorem ipsum dolor sit amet consectetur adipiscing. Nunc mattis enim ut tellus elementum. Laoreet sit amet cursus sit amet dictum sit amet. Imperdiet massa tincidunt nunc pulvinar sapien et. Risus sed vulputate odio ut enim. Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus. Venenatis urna cursus eget nunc scelerisque viverra mauris in aliquam. Fringilla est ullamcorper eget nulla. Volutpat lacus laoreet non curabitur gravida arcu ac tortor. Massa tempor nec feugiat nisl pretium fusce id.
+                    <h2> Links </h2>
+                    <ul v-for="datum in data.slice(0, 10)" :key="datum.id">
+                        <li><a href=#>{{datum.title}}</a></li>
+                    </ul>
+                    
                 </div>
             </div>
             <div class="col-md-2 no-gutters" >
                 <div class="rightPanel">
+                    <div>
+                        <form class="form-inline my-2 my-lg-0 text-center justify-content-center align-items-center right-panel-item">
+                            <input class="form-control w-75 mr-sm-2 " type="search" placeholder="💬" aria-label="Search">
+                            <button class="btn-sm btn-outline-secondary my-2 my-sm-0 btn-custom text-center justify-content-center align-items-center" type="submit">Search</button>
+                        </form>
+                        <!-- <form>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -20,8 +41,21 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: "Links",
+    data: function(){
+        return {
+            data: null
+        }
+    },
+    created: function() {
+      axios
+        .get('https://jsonplaceholder.typicode.com/photos')
+        .then(res => {
+          this.data = res.data;
+        })
+    }
 }
 
 </script>
@@ -31,13 +65,34 @@ export default {
     margin-bottom: 5%;
     font-family: 'inter'
   }
+  h2 {
+      text-align: center;
+  }
   .leftPanel{
       height: 25vh;
       width: 100%;
   }
+  .left-panel-item{
+      text-align: center;
+      padding-top:8%;
+  }
+  a{
+      color: #333333
+  }
+  a:hover {
+    color: red;
+    }
   .rightPanel{
     height: 0vh;
     width: 100%;
+  }
+  .right-panel-item{
+    padding-top:8%;
+    padding-left: 3%;
+    padding-bottom: 3%;
+  }
+  .btn-custom{
+      margin-top: 100%;
   }
   .middlePanel{
       height: 75vh;
@@ -57,7 +112,6 @@ export default {
        }
   }
   p{
-    /* font-family: 'Comic Sans MS'; */
     font-family: 'Inter', serif;
     text-align: left;
   }
